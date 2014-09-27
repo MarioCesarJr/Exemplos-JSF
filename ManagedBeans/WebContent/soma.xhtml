@@ -1,0 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+		<h:form>
+		   valor 1 :<h:inputText value="#{somaValores.valor1}" /><br/>	
+		    valor 2 :<h:inputText value="#{somaValores.valor2}" />	
+		   <h:commandButton action="#{somaValores.totalSoma()}" value="Somar" /><br/><br/>
+           	Resultado : #{somaValores.resultado}	  
+		</h:form>
+</html>
