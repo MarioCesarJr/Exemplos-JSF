@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<h:form>
+		<h:commandLink value="Voltar para tela inicial" action="index?faces-redirect=true" />
+		<br />
+		<br />
+
+		<h:commandButton value="Ajuda" action="#{gestaoLivrosBean.obterAjuda}" />
+		<br />
+		<br />
+     
+        Titulo:
+        <h:inputText value="#{gestaoLivrosBean.livro.titulo}" />
+		<br />
+        Autor:
+        <h:inputText value="#{gestaoLivrosBean.livro.autor}" />
+		<br />
+        Assunto:
+        <h:inputText value="#{gestaoLivrosBean.livro.assunto}" />
+		<br />
+		<h:commandButton action="#{gestaoLivrosBean.incluir}" value="Salvar" />
+	</h:form>
+
+	<h:form>
+    Pesquisa por nome:
+    <h:inputText value="#{gestaoLivrosBean.nomePesquisa}" valueChangeListener="#{gestaoLivrosBean.nomePesquisaAlterado}"
+			onchange="submit()" />
+	</h:form>
+
+
+	<h:form>
+		<ui:repeat var="item" value="#{gestaoLivrosBean.livrosFiltrados}">
+			<li>#{item.titulo} - #{item.autor} - #{item.assunto}<h:commandButton
+					value="Excluir" action="#{gestaoLivrosBean.excluir}">
+					<f:setPropertyActionListener
+						target="#{gestaoLivrosBean.livroSelecionado}" value="#{item}" />
+				</h:commandButton>
+			</li>
+		</ui:repeat>
+	</h:form>
+</h:body>
+
+</html>
+
