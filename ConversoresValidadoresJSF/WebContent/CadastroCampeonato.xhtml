@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<h:form id = "frm">
+	     <h:messages showSummary="false" showDetail="true"/>     
+	
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Data do Jogo" />
+			<h:inputText label="data" value="#{campeonatoBean.campeonato.dataJogo}" validator="conversores.validator">
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" />
+			</h:inputText>
+
+			<h:outputLabel value="Time da Casa" />
+			<h:inputText label="time da casa" id="timeCasa" value="#{campeonatoBean.campeonato.timeCasa}" required="true">
+			   <f:validateLength minimum="5"/>
+			</h:inputText>
+
+			<h:outputLabel value="Gols do time da casa" />
+			<h:panelGroup>
+				<h:inputText label="gols do time da casa" id="golsTimeCasa" value="#{campeonatoBean.campeonato.golsTimeCasa}" required="true">
+				     <f:validateLongRange minimum="0" maximum="99"/>
+				</h:inputText>
+				<h:message for="golsTimeCasa" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+
+			<h:outputLabel value="Time visitante" />
+			<h:inputText label="time visitante" id="timeVisitante" value="#{campeonatoBean.campeonato.timeVisitante}" required="true" >
+			     <f:validateLength minimum="5"/>
+			</h:inputText>
+
+			<h:outputLabel value="Gols do time visitante" />
+			<h:panelGroup>
+				<h:inputText label="gols visitante" id="golsTimeVisitante" value="#{campeonatoBean.campeonato.golsTimeVisitante}" required="true">
+				   <f:validateLongRange minimum="0" maximum="99"/>
+				</h:inputText>
+				<h:message for="golsTimeVisitante" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+
+			<h:outputLabel value="Valor Arrecadado" />
+			<h:panelGroup>
+				<h:inputText label="valor" id="valorArrecadado" value="#{campeonatoBean.campeonato.arrecadacaoJogo}"
+				   converter="conversor.valor">
+		<!-- 		<f:convertNumber minFractionDigits="2" locale="pt_BR" />
+					<f:validateDoubleRange minimum="0"/>    -->
+				</h:inputText>
+				<h:message for="valorArrecadado" showSummary="true" showDetail="false" />
+			</h:panelGroup>
+
+			<h:commandButton value="Cadastrar" action="#{campeonatoBean.cadastrar}" />
+			<h:commandButton value="Limpar" actionListener="#{campeonatoBean.limpar()}" immediate="true" />
+		</h:panelGrid>
+
+		<h:dataTable var="item" value="#{campeonatoBean.campeonatos}" border="1">
+			<h:column>
+				<f:facet name="header">Data do Jogo</f:facet>
+				<h:outputText value="#{item.dataJogo}" >
+				  <f:convertDateTime pattern="dd, MMMM yyyy" locale="pt_BR" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Time da Casa</f:facet>
+				<h:outputText value="#{item.timeCasa}" />	
+			</h:column>
+			<h:column>
+				<f:facet name="header">Gols Time da Casa</f:facet>
+				<h:outputText value="#{item.golsTimeCasa}" />				
+			</h:column>
+			<h:column>
+				<f:facet name="header">Time Visitante</f:facet>
+				<h:outputText value="#{item.timeVisitante}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Gols Time Visitante</f:facet>
+				<h:outputText value="#{item.golsTimeVisitante}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Arrecadação</f:facet>
+				<h:outputText value="#{item.arrecadacaoJogo}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
+			</h:column>
+			
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
